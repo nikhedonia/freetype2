@@ -1,0 +1,6 @@
+{
+  "name": "freetype2",
+  "dependencies": {
+    "zlib": "1.2.11"
+  }
+}

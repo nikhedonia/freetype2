@@ -1,2 +1,7 @@
 config.mk
 objs/vc2010/
+/buck-out/
+/.buckd/
+/buckaroo/
+.buckconfig.local
+BUCKAROO_DEPS
