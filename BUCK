@@ -1,13 +1,33 @@
 include_defs('//BUCKAROO_DEPS')
 
+mono_sources = [
+  'src/autofit/autofit.c',
+  'src/bdf/bdf.c',
+  'src/cache/ftcache.c',
+  'src/cff/cff.c',
+  'src/pcf/pcf.c',
+  'src/pfr/pfr.c',
+  'src/psaux/psaux.c',
+  'src/pshinter/pshinter.c',
+  'src/psname/psname.c',
+  'src/raster/raster.c',
+  'src/sfnt/sfnt.c',
+  'src/smooth/smooth.c'
+]
+
 macos_sources = glob([
+  'src/base/ftmac.c',
+])
+
+linux_sources = glob([
+
 ])
 
 windows_sources = glob([
-  'src/winfonts/**/*.c',
+
 ])
 
-platform_sources = macos_sources + windows_sources
+platform_sources = macos_sources + windows_sources + linux_sources
 
 cxx_library(
   name = 'freetype2',
@@ -24,9 +44,10 @@ cxx_library(
   excludes = glob([
     'src/autofit/aflatin2.c',
     'src/gzip/infutil.c',
-  ]) + platform_sources),
+  ]) + platform_sources + mono_sources),
   platform_srcs = [
-    ('default', macos_sources),
+    ('default', linux_sources),
+    ('^linux.*', linux_sources),
     ('^macos.*', macos_sources),
     ('^windows.*', windows_sources),
   ],
